@@ -1,0 +1,66 @@
+Table product {
+    id integer [pk]
+    product_name varchar(255)
+    product_number varchar(16)
+    description text
+    category_id integer [ref: > category.id]
+    available_qty integer
+    current_price decimal(9, 2)
+}
+
+Table category {
+    id integer [pk]
+    category_name varchar(100)
+}
+
+Table media {
+    id integer [pk]
+    media_name varchar(255)
+    uri varchar(255)
+}
+
+Table product_media {
+    id integer [pk]
+    product_id integer [ref: > product.id]
+    media_id integer [ref: > media.id]
+}
+
+Table system_user {
+    id integer [pk]
+    name varchar(255)
+    surname varchar(255)
+    email varchar(255)
+    phone varchar(13)
+    password_hash varchar(60)
+}
+
+Table address {
+    id integer [pk]
+    city varchar(80)
+    postal_code varchar(30)
+    building_number varchar(10)
+    street varchar(120)
+}
+
+Table user_address {
+    id integer [pk]
+    user_id integer [ref: > system_user.id]
+    address_id integer [ref: > address.id]
+}
+
+Table cart {
+    id integer [pk]
+    user_id integer [ref: > system_user.id]
+    product_id integer [ref: > product.id]
+    created_at timestamp
+}
+
+Table order {
+    id integer [pk]
+    order_number integer
+    user_id integer [ref: > system_user.id]
+    product_id integer [ref: > product.id]
+    address_id integer [ref: > address.id]
+    price_dollars decimal(9, 2)
+    ordered_at timestamp
+}

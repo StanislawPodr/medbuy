@@ -1,0 +1,29 @@
+Table shipment_method {
+    id integer [pk]
+    provider_name varchar(255)
+    provider_id varchar(50)
+    added_at timestam
+}
+
+// Can be done automatically with Coil/Glide
+Table media_cache {
+    id integer [pk]
+    media_uri_server text [unique]
+    media_uri_local text
+    cached_at timestamp
+}
+
+// This is a reference only, not to be stored in sqlite db
+Table payment_card {
+    id integer [pk]
+    token varchar(255)
+    brand varchar(30)
+    last4 varchar(4)
+    valid_through varchar(7)
+    name_on_card varchar(100)
+}
+
+Table system_user_keys {
+    id integer [pk]
+    session_token varchar(255)
+}
